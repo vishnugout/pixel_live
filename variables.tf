@@ -28,3 +28,21 @@ variable "project_owner" {
   default     = "vishnu"
 }
 
+variable "hosted_zone_name" {
+  type        = string
+  description = "Domain name"
+  default     = "devopshero.online"
+}
+
+variable "hostname" {
+  type        = string
+  description = "Hostname"
+  default     = "terraform"
+}
+
+
+variable "hosted_zone_id" {
+  type        = string
+  description = "my official hosted zone id"
+  default     = "Z086323036DVS2K1LP5RG"
+}
