@@ -30,7 +30,14 @@ resource "aws_security_group" "http_access" {
   }
 
   ingress {
-    from_port   = 8080	
+    from_port   = 9090
+    to_port     = 9090
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
@@ -80,10 +87,10 @@ resource "aws_security_group" "remote_access" {
 
 
 resource "aws_instance" "frontend" {
-  ami             = var.ami_id
-  instance_type   = var.instance_type
-  key_name        = aws_key_pair.auth_key.key_name
-  user_data       = file("setup.sh")
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  key_name               = aws_key_pair.auth_key.key_name
+  user_data              = file("setup.sh")
   vpc_security_group_ids = [aws_security_group.http_access.id, aws_security_group.remote_access.id]
 
   tags = {
